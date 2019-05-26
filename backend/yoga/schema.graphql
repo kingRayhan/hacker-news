@@ -1,0 +1,75 @@
+# import * from '../prisma/prisma.graphql'
+
+type User {
+    id: ID!
+    name: String!
+    username: String!
+    email: String!
+    posts: String!
+    comments: String!
+    upVotes: [Post!]!
+    downVotes: [Post!]!
+}
+
+type Mutation {
+    #Post
+    createPost(title: String!, url: String!): Post!
+    updatePost(data: PostUpdateInput!, id: ID!): Post
+    deletePost(id: ID!): Post
+
+    #Comment
+    createComment(body: String!, postId: ID!): Comment!
+    updateComment(data: CommentUpdateInput!, id: ID!): Comment
+    deleteComment(id: ID!): Comment
+
+    ## AUth
+    signup(
+        name: String!
+        username: String!
+        email: String!
+        password: String!
+    ): User!
+
+    signin(user: String!, password: String!): User!
+}
+
+type Query {
+    comment(where: CommentWhereUniqueInput!): Comment
+    comments(
+        where: CommentWhereInput
+        orderBy: CommentOrderByInput
+        skip: Int
+        after: String
+        before: String
+        first: Int
+        last: Int
+    ): [Comment]!
+    commentsConnection(
+        where: CommentWhereInput
+        orderBy: CommentOrderByInput
+        skip: Int
+        after: String
+        before: String
+        first: Int
+        last: Int
+    ): CommentConnection!
+    post(where: PostWhereUniqueInput!): Post
+    posts(
+        where: PostWhereInput
+        orderBy: PostOrderByInput
+        skip: Int
+        after: String
+        before: String
+        first: Int
+        last: Int
+    ): [Post]!
+    postsConnection(
+        where: PostWhereInput
+        orderBy: PostOrderByInput
+        skip: Int
+        after: String
+        before: String
+        first: Int
+        last: Int
+    ): PostConnection!
+}

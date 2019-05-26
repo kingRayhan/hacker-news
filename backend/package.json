@@ -1,0 +1,19 @@
+{
+    "name": "prisma-blog",
+    "description": "prisma testing blog",
+    "dependencies": {
+        "bcryptjs": "^2.4.3",
+        "cookie-parser": "^1.4.4",
+        "dotenv": "^8.0.0",
+        "graphql-cli": "^3.0.11",
+        "graphql-yoga": "^1.17.4",
+        "jsonwebtoken": "^8.5.1",
+        "prisma-binding": "^2.3.10",
+        "validator": "^11.0.0"
+    },
+    "scripts": {
+        "generate-schema": "graphql get-schema -p prisma",
+        "deploy": "prisma deploy && npm run generate-schema",
+        "dev": "nodemon index -e js,grapgql"
+    }
+}

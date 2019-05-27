@@ -1,5 +1,52 @@
 # import * from '../prisma/prisma.graphql'
 
+type Comment {
+    id: ID!
+    body: String!
+    post: Post!
+    createdAt: DateTime!
+    updatedAt: DateTime!
+    author: User!
+    own: Boolean!
+}
+
+type Post {
+    id: ID!
+    title: String!
+    url: String!
+    comments(
+        where: CommentWhereInput
+        orderBy: CommentOrderByInput
+        skip: Int
+        after: String
+        before: String
+        first: Int
+        last: Int
+    ): [Comment!]
+    createdAt: DateTime!
+    updatedAt: DateTime!
+    author: User!
+    upVotes(
+        where: UserWhereInput
+        orderBy: UserOrderByInput
+        skip: Int
+        after: String
+        before: String
+        first: Int
+        last: Int
+    ): [User!]
+    downVotes(
+        where: UserWhereInput
+        orderBy: UserOrderByInput
+        skip: Int
+        after: String
+        before: String
+        first: Int
+        last: Int
+    ): [User!]
+    own: Boolean!
+}
+
 type User {
     id: ID!
     name: String!
@@ -12,17 +59,17 @@ type User {
 }
 
 type Mutation {
-    #Post
+    # Post
     createPost(title: String!, url: String!): Post!
     updatePost(data: PostUpdateInput!, id: ID!): Post
     deletePost(id: ID!): Post
 
-    #Comment
+    # Comment
     createComment(body: String!, postId: ID!): Comment!
     updateComment(data: CommentUpdateInput!, id: ID!): Comment
     deleteComment(id: ID!): Comment
 
-    ## AUth
+    ## Auth
     signup(
         name: String!
         username: String!
@@ -72,4 +119,6 @@ type Query {
         first: Int
         last: Int
     ): PostConnection!
+
+    me: User
 }

@@ -3,7 +3,8 @@ const { hash, compare } = require('bcryptjs')
 const { sign } = require('jsonwebtoken')
 const Mutation = {
     async createPost(parent, args, { prisma, request }, info) {
-        if (!request.user) throw new Error('Un authrorized')
+        if (!request.user)
+            throw new Error('Login is requred for creating a link')
 
         if (!args.title.length)
             // Validation
@@ -50,6 +51,29 @@ const Mutation = {
             {
                 where: {
                     id: args.id,
+                },
+            },
+            info
+        )
+    },
+    async createComment(parent, args, { prisma, request }, info) {
+        if (!request.user)
+            throw new Error('Login is requred for creating a Comment')
+
+        return await prisma.mutation.createComment(
+            {
+                data: {
+                    body: args.body,
+                    post: {
+                        connect: {
+                            id: args.postId,
+                        },
+                    },
+                    author: {
+                        connect: {
+                            id: request.user.id,
+                        },
+                    },
                 },
             },
             info

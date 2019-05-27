@@ -12,10 +12,7 @@ const StyledError = styled.div`
 const GQLError = props => {
     return props.error ? (
         <StyledError>
-            <>
-                <b>Error:</b>{' '}
-                {props.error.message.replace('GraphQL error: ', '')}
-            </>
+            {props.error.message.replace('GraphQL error: ', '')}
         </StyledError>
     ) : null
 }

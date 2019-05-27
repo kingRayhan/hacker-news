@@ -1,12 +1,10 @@
 import React from 'react'
-import News from '../components/News'
-import Comments from '../components/Comments'
+import NewsDetails from '../components/NewsDetails'
 
-const SingleNewspage = () => {
+const SingleNewspage = props => {
     return (
         <div>
-            <News />
-            <Comments />
+            <NewsDetails id={props.query.id} />
         </div>
     )
 }

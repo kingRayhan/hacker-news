@@ -38,4 +38,13 @@ export default styled.form`
         padding: 8px 11px;
         font-size: 12px;
     }
+    fieldset {
+        border: none;
+        &[disabled] {
+            background-color: ${tp => tp.theme.lightgrey};
+            textarea {
+                background-color: ${tp => tp.theme.lightgrey};
+            }
+        }
+    }
 `

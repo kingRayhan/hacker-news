@@ -64,8 +64,6 @@ class CreateLink extends Component {
                                 NProgress.done()
                             }
 
-                            if (error) return <GQLError error={error} />
-
                             return (
                                 <Panel>
                                     <Form
@@ -83,6 +81,7 @@ class CreateLink extends Component {
                                             })
                                         }}
                                     >
+                                        <GQLError error={error} />
                                         <label>
                                             Title
                                             <input

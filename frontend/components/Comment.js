@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-
-import Replies from './Replies'
+import moment from 'moment'
+// import Replies from './Replies'
 
 const StyledComment = styled.div`
     width: 80%;
@@ -16,19 +16,23 @@ const StyledComment = styled.div`
     margin-bottom: 15px;
 `
 
-const Comment = () => {
+const Comment = ({ id, body, author, createdAt, own }) => {
     return (
         <StyledComment>
             <div className="meta">
-                <a href="#">@shoaib</a> , 2 hours ago
+                <a href="#">@{author.username}</a> ,{' '}
+                {moment(createdAt).fromNow()}
             </div>
-            <p className="comment-body">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Voluptates, ducimus nulla nihil saepe, autem aperiam veritatis
-                animi accusantium nisi esse architecto mollitia porro minima
-                quisquam similique officiis obcaecati ad et.
-            </p>
-            <Replies />
+            <p className="comment-body">{body}</p>
+            {own && (
+                <div className="meta">
+                    <a href="#">Edit</a>
+                    {'  '}
+                    <a href="#">Delete</a>
+                </div>
+            )}
+
+            {/* <Replies /> */}
         </StyledComment>
     )
 }

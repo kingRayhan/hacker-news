@@ -10,8 +10,8 @@ const Query = {
 
     async me(parent, args, { prisma, request }, info) {
         if (!request.user) return null
-        const userId = response.userId
-        return await prisma.query.user({ wheere: { id: userId } }, info)
+        const userId = request.userId
+        return await prisma.query.user({ where: { id: userId } }, info)
     },
 }
 

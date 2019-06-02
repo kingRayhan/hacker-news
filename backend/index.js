@@ -8,7 +8,7 @@ const prisma = require('./prisma/prisma')
 server.express.use(cookieParser())
 
 server.express.use((req, res, next) => {
-    let token = req.cookies.token
+    let token = req.cookies.token || req.headers.token
     if (token) {
         const { userId } = jwt.verify(token, process.env.APP_SECRET)
         req.userId = userId

@@ -25,6 +25,11 @@ export default styled.form`
             outline: none;
         }
     }
+
+    label {
+        color: ${tp => tp.label || 'red'};
+    }
+
     input,
     textarea {
         padding: 10px;

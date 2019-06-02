@@ -1,5 +1,10 @@
 # import * from '../prisma/prisma.graphql'
 
+enum VOTE_TYPES {
+    UP_VOTE
+    DOWN_VOTE
+}
+
 type Comment {
     id: ID!
     body: String!
@@ -52,8 +57,8 @@ type User {
     name: String!
     username: String!
     email: String!
-    posts: String!
-    comments: String!
+    posts: [Post]!
+    comments: [Comment]!
     upVotes: [Post!]!
     downVotes: [Post!]!
 }
@@ -78,6 +83,9 @@ type Mutation {
     ): User!
 
     signin(user: String!, password: String!): User!
+    logout: Boolean!
+
+    createVote(type: VOTE_TYPES, postId: ID!): Post!
 }
 
 type Query {

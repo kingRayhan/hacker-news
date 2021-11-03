@@ -9,7 +9,7 @@
         "graphql-yoga": "^1.17.4",
         "jsonwebtoken": "^8.5.1",
         "prisma-binding": "^2.3.10",
-        "validator": "^11.0.0"
+        "validator": "^13.7.0"
     },
     "scripts": {
         "generate-schema": "graphql get-schema -p prisma",
